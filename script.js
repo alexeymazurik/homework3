@@ -1,3 +1,5 @@
+// main function
+
 window.onload = function() {
 
     // ИЗБАВИТСЯ ОТ ЛИШНЕГО (ПОВТОРЯЮЩЕГОСЯ) КОДА !!!
@@ -5,11 +7,14 @@ window.onload = function() {
 
 
     // Добавим кнопку для добавления вопроса
-
+    addQuestion();
 
     var adding = document.querySelector('#addQuest');
     var buttonQuestion = document.createElement('button');
+    buttonQuestion.className = 'button_styled';
+    buttonQuestion.style.display = 'block';
     buttonQuestion.innerHTML = 'Добавить вопрос';
+
     buttonQuestion.addEventListener('click', addQuestion, false);
 
     adding.appendChild(buttonQuestion);
@@ -17,15 +22,23 @@ window.onload = function() {
     // Добавим кнопку экспорта и генерирования JSON
 
     var exportTest = document.createElement('button');
+    exportTest.className = 'button_styled';
+    exportTest.style.display = 'block';
     exportTest.innerHTML = 'Экспорт теста';
     exportTest.addEventListener('click', exportingTest,false);
 
     adding.appendChild(exportTest);
 
     json = document.createElement('textarea');
+    json.placeholder = 'Здесь будет необходимый JSON, который можно будет скопировать...';
+    json.style.width = '600px';
+    json.style.height = '200px';
+    json.readOnly = 'true';
+    json.style.fontSize = '20px';
     document.querySelector('#JSON').appendChild(json);
 
 };
+
 
 function exportingTest() {
 
@@ -35,6 +48,9 @@ function exportingTest() {
         questions : [],
         add_question : function(needquestion) {
             course.questions.push(needquestion);
+        },
+        remove_question : function(index) {
+            course.questions.splice(index,1);
         }
     };
 
@@ -51,7 +67,9 @@ function exportingTest() {
             add_answer : function(needanswer) {
                 this.answers.push(needanswer);
             },
-            remove_answer : {}
+            remove_answer : function (index) {
+                this.answers.splice(index,1);
+            }
 
         };
 
@@ -84,10 +102,10 @@ function exportingTest() {
         course.add_question(question);
     }
 
-    console.log(course);
+
 
     json.value = '';
-    json.value = 'course = { \n ';
+    json.value = JSON.stringify(course);
 
 
 
@@ -97,19 +115,16 @@ function exportingTest() {
 // Функция добавления блока с вопросом
 
 function addQuestion() {
-    var heightBlock = 200;
+    var heightBlock = 150;
     var content = document.getElementById('content');
     var question_block = document.createElement('div');
-    question_block.style.width = '400px';
-    question_block.style.margin = '10px';
     question_block.style.height =  heightBlock + 'px';
-    question_block.style.background = 'lightskyblue';
-    question_block.style.border = '1px solid black';
     question_block.className = 'questionBlock'; //повесили класс на блок вопроса
     content.appendChild(question_block);
 
     var close_button = document.createElement('button');
     close_button.innerHTML = 'X';
+    close_button.className = 'closeButton';
     close_button.style.position = 'relative';
     close_button.style.float = 'right';
     question_block.appendChild(close_button);
@@ -117,6 +132,7 @@ function addQuestion() {
     var questionInput = document.createElement('input');
     questionInput.type = 'text';
     questionInput.className = 'questionTitle'; //повесили класс на сам вопрос
+    questionInput.placeholder = 'Введите вопрос...';
     question_block.appendChild(questionInput);
 
     close_button.addEventListener('click', function(){
@@ -126,7 +142,7 @@ function addQuestion() {
     var addAnswerButton = document.createElement('button');
     addAnswerButton.innerHTML = 'Добавить ответ';
     addAnswerButton.style.display = 'block';
-
+    addAnswerButton.className = 'addAnswerButton';
     question_block.appendChild(addAnswerButton);
 
     addAnswerButton.addEventListener('click',addAnswer,false);
@@ -135,13 +151,11 @@ function addQuestion() {
 
     function addAnswer() {
 
-        heightBlock += 50;
+        heightBlock += 80;
         question_block.style.height = heightBlock + 'px';
 
         var answerBlock = document.createElement('div');
         answerBlock.className = 'answerBlock';// повесили класс на блок ответа
-        answerBlock.style.width = '250px';
-        answerBlock.style.height = '50px';
 
         question_block.appendChild(answerBlock);
 
@@ -157,16 +171,18 @@ function addQuestion() {
         answerInput.type = 'text';
         answerInput.className = 'answerTitle'; // повесили класс на текст ответа
         answerInput.style.display = 'inline-block';
+        answerInput.placeholder = 'Введите ответ...';
 
         answerBlock.appendChild(answerInput);
 
         var answerCloseButton = document.createElement('button');
         answerCloseButton.innerHTML = 'X';
+        answerCloseButton.className = 'closeButton';
         answerBlock.appendChild(answerCloseButton);
 
         answerCloseButton.addEventListener('click', function(){
             question_block.removeChild(answerBlock);
-            heightBlock -=50;
+            heightBlock -= 80;
             question_block.style.height = heightBlock + 'px';
         },false);
 
@@ -175,5 +191,6 @@ function addQuestion() {
     }
 
 }
+
 
 
