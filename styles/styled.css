@@ -14,6 +14,9 @@ h1.styled,h2.styled,h3.styled,h4.styled,h5.styled,h6.styled {
     font-weight: lighter;
     color: black;
     border-left: 4px lightgrey solid;
+    width: 30px;
+    display: inline;
+    margin: 10px 0 10px 0;
 }
 
 .right {
@@ -31,8 +34,7 @@ p {
 }
 /*Stylising button*/
 .button_styled {
-    width: 150px;
-    height: 50px;
+    height: 30px;
     border-radius: 10px;
     background: linear-gradient(to top, lightgrey, white);
     border: 1px grey solid;
@@ -40,7 +42,7 @@ p {
     font-weight: bold;
     font-size: 15px;
     box-shadow: 0 0 4px black;
-    margin: 10px auto 10px auto;
+
 }
 .button_styled:focus {
     outline: none;
@@ -196,7 +198,7 @@ ol li:before {
 
 
 .closeButton {
-    display: relative;
+    position: relative;
     float: right;
     width: 30px;
     height: 30px;
@@ -237,7 +239,6 @@ ol li:before {
 #footer {
     margin: 10px;
     padding: 10px;
-
     opacity: 0.7;
 }
 
@@ -268,11 +269,11 @@ ol li:before {
     background: grey;
 }
 
-.questionBlock {
+.questionUsualBlock,.questionPictureBlock,.questionTextBlock {
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
     padding: 10px;
     width: 600px;
-    background: whitesmoke;
+    background: #c3c8c1;
     margin: 10px;
 
 }
@@ -284,7 +285,7 @@ ol li:before {
     border: 2px solid grey;
     width: 450px;
     height: 50px;
-
+    background: lightgrey;
 }
 
 input.checkbox {
@@ -292,7 +293,7 @@ input.checkbox {
     height: 15px;
 }
 
-.questionTitle, .answerTitle {
+.questionUsualTitle, .answerUsualTitle, .questionPictureTitle,.questionTextTitle, .answerPictureTitle, .answerTextTitle{
     margin-left: 10px;
     width: 300px;
     border-radius: 5px;
@@ -301,12 +302,12 @@ input.checkbox {
 
 }
 
-.questionBlock:hover {
-    background: rgb(202, 202, 202);
+.questionUsualBlock:hover, .questionPictureBlock:hover, .questionTextBlock:hover {
+    background: rgb(137, 172, 202);
 }
 
 .answerBlock:hover {
-    background: rgb(181, 181, 181);
+    background: rgb(92, 117, 181);
 }
 
 #intro {
@@ -321,4 +322,8 @@ input.checkbox {
     font-family: sans-serif;
     text-indent: 25px;
     text-align: justify;
+}
+#header {
+    margin: 10px;
+    padding: 10px;
 }
